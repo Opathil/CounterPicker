@@ -1,0 +1,64 @@
+﻿
+
+@{
+    ViewBag.Title = "Heroes";
+}
+
+<h2>Champions</h2>
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    debugger;
+    var champion;
+    $.ajax({
+        url: 'https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion/92?champData=all&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c',
+        method: 'GET',
+        async: false,
+        dataType: "json",
+        success: function (hero) {
+            champion = hero;
+            console.log('sad1function')
+        }
+    })
+</script>
+
+<script>
+    debugger;
+    $.ajax({
+        url: '/Home/GettinHeroes',
+        method: 'POST',
+        dataType: "json",
+        data: { boncho : JSON.stringify(champion) },
+        success: function () {
+            console.log(champion);
+        }
+    })
+</script>
+
+<script>
+    (function tableCreate() {
+        var body = document.getElementsByTagName('body')[0];
+        var tbl = document.createElement('table');
+        tbl.style.width = '100%';
+        tbl.setAttribute('border', '1');
+        var tbdy = document.createElement('tbody');
+        for (var i = 0; i < 3; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j < 2; j++) {
+                if (i == 2 && j == 1) {
+                    break
+                } else {
+                    var td = document.createElement('td');
+                    td.appendChild(document.createTextNode('\u0020'))
+                    i == 1 && j == 1 ? td.setAttribute('rowSpan', '2') : null;
+                    tr.appendChild(td)
+                }
+            }
+            tbdy.appendChild(tr);
+        }
+        tbl.appendChild(tbdy);
+        body.appendChild(tbl)
+    })()
+</script>
+
+

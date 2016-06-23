@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D6519ADB-6C1E-42DA-BCBC-36BB672D966C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{41F00733-5B9D-4EAD-BE75-42839CEBFFB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterPicker.Web", "Web\CounterPicker.Web\CounterPicker.Web.csproj", "{C163AF99-46BF-4DB6-BB71-9644F85D74CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{84DA4758-EB1B-4231-96DD-1D0EEC661E49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterPicker.Data.Models", "Data\CounterPicker.Data.Models\CounterPicker.Data.Models.csproj", "{5B4FF848-297B-49F5-8736-913D03A2193D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C163AF99-46BF-4DB6-BB71-9644F85D74CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C163AF99-46BF-4DB6-BB71-9644F85D74CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C163AF99-46BF-4DB6-BB71-9644F85D74CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C163AF99-46BF-4DB6-BB71-9644F85D74CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B4FF848-297B-49F5-8736-913D03A2193D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4FF848-297B-49F5-8736-913D03A2193D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4FF848-297B-49F5-8736-913D03A2193D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4FF848-297B-49F5-8736-913D03A2193D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C163AF99-46BF-4DB6-BB71-9644F85D74CF} = {D6519ADB-6C1E-42DA-BCBC-36BB672D966C}
+		{5B4FF848-297B-49F5-8736-913D03A2193D} = {41F00733-5B9D-4EAD-BE75-42839CEBFFB2}
+	EndGlobalSection
+EndGlobal
