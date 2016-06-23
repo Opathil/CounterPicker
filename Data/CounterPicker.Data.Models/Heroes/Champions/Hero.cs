@@ -10,6 +10,8 @@
     {
         public Hero()
         {
+            this.allytips = new List<string>();
+            this.enemytips = new List<string>();
             this.tags = new List<string>();
             this.skins = new List<Skin>();
             this.recommended = new List<Recommended>();

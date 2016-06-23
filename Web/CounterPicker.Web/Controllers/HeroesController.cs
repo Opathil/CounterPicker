@@ -22,17 +22,25 @@
         // GET: Heroes
         public async Task<ActionResult> Index()
         {
-            await GetAllHeroes();
-            return View();
+            var champions = await GetAllHeroes();
+            return View(champions);
         }
 
         [HttpGet]
-        public async Task<Champion> GetAllHeroes()
+        public async Task<List<Hero>> GetAllHeroes()
         {
-            var responseString = await "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion/105?champData=all&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c"
+            var responseString = await "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion?champData=image&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c"
                 .GetStringAsync();         
-            var champion = JsonConvert.DeserializeObject<Hero>(responseString);
-            return null;
+            var champion = JsonConvert.DeserializeObject<Champion>(responseString);
+
+            List<Hero> champions = new List<Hero>();
+
+            foreach(var hero in champion.data)
+            {
+                champions.Add(hero.Value);
+            }
+
+            return champions;
         }
     }
 }

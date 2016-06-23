@@ -1,8 +1,10 @@
-﻿
+﻿@using CounterPicker.Data.Models.Heroes.Champions
+@model List<Hero>
 @{
     ViewBag.Title = "Index";
 }
 
-
-<h2>Heroes Controller Index Action</h2>
-
+@foreach (var hero in Model)
+{
+    <img class="hero-images" hero-id="@hero.id" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/@hero.image.full" />
+}

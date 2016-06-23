@@ -11,7 +11,7 @@
 
         public string version { get; set; }
         
-        public List<Hero> data { get; set; }
+        public Dictionary<string,Hero> data { get; set; }
 
         public Dictionary<int,string> keys { get; set; }
     }
