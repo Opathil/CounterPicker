@@ -29,18 +29,29 @@
         [HttpGet]
         public async Task<List<Hero>> GetAllHeroes()
         {
-            var responseString = await "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion?champData=image&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c"
-                .GetStringAsync();         
-            var champion = JsonConvert.DeserializeObject<Champion>(responseString);
+            var championImageString = await "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion?champData=image&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c"
+                .GetStringAsync();        
+            var championsImages = JsonConvert.DeserializeObject<Champion>(championImageString);
 
             List<Hero> champions = new List<Hero>();
 
-            foreach(var hero in champion.data)
+            foreach(var champion in championsImages.data)
             {
-                champions.Add(hero.Value);
+                champions.Add(champion.Value);
             }
 
             return champions;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Hero(int championId)
+        {
+            var championFullInfoAsString = await ("https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion/" + championId + "?champData=all&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c")
+                .GetStringAsync();
+
+            var championFullInfo = JsonConvert.DeserializeObject<Hero>(championFullInfoAsString);
+
+            return View(championFullInfo);
         }
     }
 }

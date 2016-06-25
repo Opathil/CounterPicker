@@ -1,5 +1,9 @@
 ﻿namespace CounterPicker.Data.Models.Heroes.Champions
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
     public class HeroStats
     {
         public double armor { get; set; }
@@ -41,5 +45,6 @@
         public double spellblock { get; set; }
 
         public double spellblockperlevel { get; set; }
+
     }
 }

@@ -1,0 +1,12 @@
+﻿@using CounterPicker.Data.Models.Heroes.Champions
+@model Hero
+
+@{
+    ViewBag.Title = "Hero";
+}
+
+@foreach(var spell in Model.spells )
+{
+    <h3>@spell.name</h3>
+}
+

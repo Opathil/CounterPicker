@@ -4,7 +4,60 @@
     ViewBag.Title = "Index";
 }
 
-@foreach (var hero in Model)
-{
-    <img class="hero-images" hero-id="@hero.id" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/@hero.image.full" />
-}
+<style>
+    .champion-list li {
+        display: inline-block;
+        margin: 0;
+        overflow: hidden;
+        border-radius: 1000px;
+        box-shadow: 0 0 4px #111111;
+    }
+
+    ol li {
+        list-style-type: none;
+    }
+
+    .champion-image {
+        width: 50px;
+        height: 50px;
+    }
+</style>
+
+
+
+
+<div>
+    <ol class="champion-list">
+        @foreach (var hero in Model)
+        {
+            <li class="champion-list-item" champion-id="@hero.id" champion-name="@hero.name">
+                <span>
+                    <a href="~/Heroes/Hero/?championId=@hero.name">
+                        <img class="champion-image" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/@hero.image.full" />
+                    </a>
+                </span>
+            </li>
+        }
+    </ol>
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $('.champion-list-item').click(function () {
+        $.ajax({
+            url: '/Heroes/Hero',
+            type: 'GET',
+            data: {
+                championId: $(this).attr('champion-id'),
+                id: $(this).attr('champion-name')
+            },
+            success: function() {
+                console.log('Success');
+            },
+            error: function () {
+                console.log('Error')
+            }
+        });
+    })
+</script>
