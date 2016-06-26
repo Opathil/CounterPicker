@@ -19,23 +19,12 @@
 
     public class HeroesController : Controller
     {
-        public Dictionary<string, int> HeroKeys { get; set; }
 
-        public HeroesController()
-        {
-            this.HeroKeys = new Dictionary<string, int>();
-        }
-
-        public async Task<ActionResult> Index()
-        {
-            var champions = await GetAllHeroesPictures();
-            return View(champions);
-        }
-
+        static Dictionary<string, int> HeroKeys = new Dictionary<string, int>();   
+        
 
         public async Task<Dictionary<string,int>> GetChampionKeys()
         {
-
             var championInfoAsString = await "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion?api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c"
                 .GetStringAsync();
 
@@ -46,8 +35,16 @@
                 HeroKeys.Add(hero.Value.key, hero.Value.id);
             }
 
-            return HeroKeys;
+            return HeroKeys;        
         }
+
+
+        public async Task<ActionResult> Index()
+        {
+            var champions = await GetAllHeroesPictures();
+            return View(champions);
+        }
+
 
         [HttpGet]
         public async Task<List<Hero>> GetAllHeroesPictures()
@@ -69,7 +66,10 @@
         [HttpGet]
         public async Task<ActionResult> Hero(string id)
         {
-            await GetChampionKeys();
+            if(HeroKeys.Count == 0)
+            {
+                await GetChampionKeys();
+            }
 
             var fullChampionInfoAsString = await ("https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion/" + HeroKeys[id] + "?champData=all&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c")
                 .GetStringAsync();
