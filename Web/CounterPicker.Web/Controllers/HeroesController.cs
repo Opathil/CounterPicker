@@ -19,7 +19,12 @@
 
     public class HeroesController : Controller
     {
-        static Dictionary<string, int> HeroKeys = new Dictionary<string, int>();
+        public Dictionary<string, int> HeroKeys { get; set; }
+
+        public HeroesController()
+        {
+            this.HeroKeys = new Dictionary<string, int>();
+        }
 
         public async Task<ActionResult> Index()
         {
