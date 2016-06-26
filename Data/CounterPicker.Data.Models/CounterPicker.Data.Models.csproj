@@ -55,6 +55,7 @@
     <Compile Include="Heroes\Champions\Spells\Spell.cs" />
     <Compile Include="Heroes\Champions\Spells\SpellImage.cs" />
     <Compile Include="Heroes\Champions\Spells\Vars.cs" />
+    <Compile Include="Heroes\HeroesKeysModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

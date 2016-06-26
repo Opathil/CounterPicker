@@ -19,39 +19,59 @@
 
     public class HeroesController : Controller
     {
-        // GET: Heroes
+        static Dictionary<string, int> HeroKeys = new Dictionary<string, int>();
+
         public async Task<ActionResult> Index()
         {
-            var champions = await GetAllHeroes();
+            var champions = await GetAllHeroesPictures();
             return View(champions);
         }
 
-        [HttpGet]
-        public async Task<List<Hero>> GetAllHeroes()
+
+        public async Task<Dictionary<string,int>> GetChampionKeys()
         {
-            var championImageString = await "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion?champData=image&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c"
-                .GetStringAsync();        
-            var championsImages = JsonConvert.DeserializeObject<Champion>(championImageString);
+
+            var championInfoAsString = await "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion?api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c"
+                .GetStringAsync();
+
+            var championInfo = JsonConvert.DeserializeObject<Champion>(championInfoAsString);
+
+            foreach(var hero in championInfo.data)
+            {
+                HeroKeys.Add(hero.Value.key, hero.Value.id);
+            }
+
+            return HeroKeys;
+        }
+
+        [HttpGet]
+        public async Task<List<Hero>> GetAllHeroesPictures()
+        {
+            var championImageAsString = await "https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion?champData=image&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c"
+                .GetStringAsync();
+            var championsImages = JsonConvert.DeserializeObject<Champion>(championImageAsString);
 
             List<Hero> champions = new List<Hero>();
 
-            foreach(var champion in championsImages.data)
+            foreach (var champion in championsImages.data)
             {
                 champions.Add(champion.Value);
-            }
+            }           
 
             return champions;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Hero(int championId)
+        public async Task<ActionResult> Hero(string id)
         {
-            var championFullInfoAsString = await ("https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion/" + championId + "?champData=all&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c")
+            await GetChampionKeys();
+
+            var fullChampionInfoAsString = await ("https://global.api.pvp.net/api/lol/static-data/eune/v1.2/champion/" + HeroKeys[id] + "?champData=all&api_key=25cc7067-a2aa-49de-a49e-6e4055c2037c")
                 .GetStringAsync();
 
-            var championFullInfo = JsonConvert.DeserializeObject<Hero>(championFullInfoAsString);
-
-            return View(championFullInfo);
+            var fullChampionInfo = JsonConvert.DeserializeObject<Hero>(fullChampionInfoAsString);
+            
+            return View(fullChampionInfo);
         }
     }
 }

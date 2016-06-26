@@ -32,7 +32,7 @@
         {
             <li class="champion-list-item" champion-id="@hero.id" champion-name="@hero.name">
                 <span>
-                    <a href="~/Heroes/Hero/?championId=@hero.name">
+                    <a href="/Heroes/Hero/@hero.name">
                         <img class="champion-image" src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/champion/@hero.image.full" />
                     </a>
                 </span>
@@ -42,22 +42,26 @@
 </div>
 
 
-<script src="~/Scripts/jquery-1.10.2.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>
 <script>
     $('.champion-list-item').click(function () {
         $.ajax({
-            url: '/Heroes/Hero',
+            url: '/Heroes/Hero/' ,
             type: 'GET',
-            data: {
-                championId: $(this).attr('champion-id'),
-                id: $(this).attr('champion-name')
+            data: {                
+                championKey: {
+                    HeroName: $(this).attr('champion-name'),
+                    heroKey: $(this).attr('champion-id')
+                }
             },
-            success: function() {
-                console.log('Success');
+            success: function (result) {
+                debugger;
+                var w = window.open();
+                $(document.body).html(result);
             },
             error: function () {
                 console.log('Error')
             }
         });
     })
-</script>
+</script>*@
